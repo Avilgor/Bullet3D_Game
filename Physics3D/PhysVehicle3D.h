@@ -3,6 +3,7 @@
 #include "PhysBody3D.h"
 #include "glmath.h"
 
+
 class btRaycastVehicle;
 struct PhysBody3D;
 
@@ -50,6 +51,7 @@ public:
 	void Brake(float force);
 	void Turn(float degrees);
 	float GetKmh() const;
+
 public:
 
 	VehicleInfo info;

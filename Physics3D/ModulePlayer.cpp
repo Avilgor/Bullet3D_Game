@@ -28,11 +28,11 @@ bool ModulePlayer::Start()
 	car.suspensionCompression = 0.83f;
 	car.suspensionDamping = 0.88f;
 	car.maxSuspensionTravelCm = 1000.0f;
-	car.frictionSlip = 50.5;
-	car.maxSuspensionForce = 6000.0f;
+	car.frictionSlip = 50.5f;
+	car.maxSuspensionForce = 4000.0f;
 
 	// Wheel properties ---------------------------------------
-	float connection_height = 1.2f;
+	float connection_height = 1.0f;
 	float wheel_radius = 0.6f;
 	float wheel_width = 0.5f;
 	float suspensionRestLength = 1.2f;
@@ -156,7 +156,8 @@ update_status ModulePlayer::Update(float dt)
 
 
 void ModulePlayer::RestartPlayer()
-{
-	vehicle->Brake(brake);
+{	
 	vehicle->SetPos(0, 5, 10);
+	vehicle->ApplyEngineForce(-acceleration);
+	brake = BRAKE_POWER;
 }
