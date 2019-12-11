@@ -38,6 +38,13 @@ update_status ModuleSceneIntro::Update(float dt)
 	p.axis = true;
 	p.Render();
 
+
+	//Restart Level
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	{
+		App->player->RestartPlayer();
+	}
+
 	return UPDATE_CONTINUE;
 }
 
