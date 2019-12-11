@@ -108,8 +108,8 @@ update_status ModuleCamera3D::Update(float dt)
 		Y = vec3{ matrix[4], matrix[5], matrix[6] };
 		Z = vec3{ matrix[8], matrix[9], matrix[10] };
 
-		vec3 VehicleLocation = { matrix[12], matrix[13] + 7, matrix[14] };
-		Look((VehicleLocation)-Z * 18, VehicleLocation, true);
+		vec3 VehicleLocation = { matrix[12], matrix[13]+4, matrix[14] };
+		Look((VehicleLocation)-Z * 12, VehicleLocation, true);
 	}
 
 	// Recalculate matrix -------------
