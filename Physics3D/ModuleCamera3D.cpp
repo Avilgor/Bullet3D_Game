@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "PhysBody3D.h"
 #include "ModuleCamera3D.h"
+#include "ModulePlayer.h"
+#include "PhysVehicle3D.h"
 
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -41,7 +43,7 @@ update_status ModuleCamera3D::Update(float dt)
 	// Implement a debug camera with keys and mouse
 	// Now we can make this movememnt frame rate independant!
 
-	vec3 newPos(0,0,0);
+	/*vec3 newPos(0,0,0);
 	float speed = 3.0f * dt;
 	if(App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 		speed = 8.0f * dt;
@@ -57,7 +59,7 @@ update_status ModuleCamera3D::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) newPos += X * speed;
 
 	Position += newPos;
-	Reference += newPos;
+	Reference += newPos;*/
 
 	// Mouse motion ----------------
 
@@ -94,6 +96,20 @@ update_status ModuleCamera3D::Update(float dt)
 		}
 
 		Position = Reference + Z * length(Position);
+	}
+	else
+	{
+		mat4x4 matrix;
+		App->player->vehicle->GetTransform(&matrix);
+
+		Position = matrix.translation();
+
+		X = vec3{ matrix[0], matrix[1], matrix[2] };
+		Y = vec3{ matrix[4], matrix[5], matrix[6] };
+		Z = vec3{ matrix[8], matrix[9], matrix[10] };
+
+		vec3 VehicleLocation = { matrix[12], matrix[13] + 7, matrix[14] };
+		Look((VehicleLocation)-Z * 18, VehicleLocation, true);
 	}
 
 	// Recalculate matrix -------------
