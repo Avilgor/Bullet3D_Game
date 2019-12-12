@@ -63,20 +63,22 @@ void ModuleSceneIntro::BuildMap()
 	LOG("Building map.");
 	
 	// First rect
-	App->physics->RectRoad(5,10,0, 0, 0, 2);
-	//App->physics->RectRoad(-5, 1, 0, 10, 2, 3);
+	App->physics->RectRoad(5, 10, 0, 0, 0, 0);
+	App->physics->RectRoad(5, 10, 0, 0, 0, 1);
+	App->physics->RectRoad(5, 10, 0, 0, 0, 2);
+	App->physics->RectRoad(5, 10, 0, 0, 0, 3);
 
 	// First diagonal
-	//App->physics->DiagonalRoad(5, 5, 0, 5, 2);
-	//App->physics->DiagonalRoad(-5, 1, 20, 9,  1.5f, 3, 1);
+	App->physics->DiagonalRoad(5, 5, 0, 0, 0, 0);
+	App->physics->DiagonalRoad(5, 5, 0, 0, 0, 1);
+	App->physics->DiagonalRoad(5, 5, 0, 0, 0, 2);
+	App->physics->DiagonalRoad(5, 5, 0, 0, 0, 3);
 
 	// Second rect
 	//App->physics->RectRoad(5, 10, 0, 10, 0);
-	//App->physics->RectRoad(-21, 1, 28, 2,  2, 0);
 
 	// Second diagonal
 	//App->physics->DiagonalRoad(5,15,0,15,0);
-	//App->physics->DiagonalRoad(-23, 1, 28, 5, vec3(1, 2, 1), 1.5f, 2, 1);
 	
 
 }
