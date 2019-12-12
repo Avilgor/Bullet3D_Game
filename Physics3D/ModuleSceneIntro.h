@@ -20,6 +20,7 @@ public:
 	bool CleanUp();
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
+	void BuildMap();
 
 public:
 	/*
@@ -41,4 +42,6 @@ public:
 
 	PhysMotor3D* left_wheel;
 	PhysMotor3D* right_wheel;
+
+	p2DynArray<Primitive*> PrimitiveObjects;
 };

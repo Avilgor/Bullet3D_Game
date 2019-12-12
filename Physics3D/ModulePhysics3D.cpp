@@ -359,7 +359,74 @@ void ModulePhysics3D::AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, c
 	constraints.add(hinge);
 	hinge->setDbgDrawSize(2.0f);
 }
+void ModulePhysics3D::RectRoad(int length,int width, int x,int y,int z,int direction)
+{
+	bool colorSwitch = false;
+	for (int n = 0; n < length; n++)
+	{
+		Cube* s = new Cube(1.0f,2.0f,1.0f);
 
+		if (colorSwitch) { s->color = { 255,255,255 }; colorSwitch = false; }
+		else { s->color = { 255,0,0 }; colorSwitch = true; }
+
+		App->scene_intro->PrimitiveObjects.PushBack(s);
+		s->SetPos(x, y+1, z);
+
+		switch (direction)
+		{
+			case 0: x += 3.0f; break; //Right
+			case 1: x -= 3.0f; break; //Left
+			case 2: z -= 3.0f; break; //Forward
+			case 3: z += 3.0f; break; //Backward
+		}
+	}
+}
+
+void ModulePhysics3D::CurveRoad(int length, int width, int x, int y, int z, int direction)
+{
+	bool colorSwitch = false;
+	for (int n = 0; n < length; n++)
+	{
+		Cube* s = new Cube(4.0f, 4.0f, 6.0f);
+
+		if (colorSwitch) { s->color = { 255,255,255 }; colorSwitch = false; }
+		else { s->color = { 255,0,0 }; colorSwitch = true; }
+
+		App->scene_intro->PrimitiveObjects.PushBack(s);
+		s->SetPos(x, y, z);
+
+		switch (direction)
+		{
+			case 0: x += 2; break; //Right
+			case 1: x -= 2; break; //Left
+			case 2: z -= 2; break; //Forward
+			case 3: z += 2; break; //Backward
+		}
+	}
+}
+
+void ModulePhysics3D::DiagonalRoad(int length, int width, int x, int y, int z, int direction)
+{
+	bool colorSwitch = false;
+	for (int n = 0; n < length; n++)
+	{
+		Cube* s = new Cube(4.0f, 4.0f, 6.0f);
+
+		if (colorSwitch) { s->color = { 255,255,255 }; colorSwitch = false; }
+		else { s->color = { 255,0,0 }; colorSwitch = true; }
+
+		App->scene_intro->PrimitiveObjects.PushBack(s);
+		s->SetPos(x, y, z);
+
+		switch (direction)
+		{
+			case 0: x += 2; z -= 1; break; //Top-Right
+			case 1: x += 2; z += 1; break; //Bottom-Right
+			case 2: z -= 2; z -= 1; break; //Top-Left
+			case 3: z -= 2; z += 1; break; //Bottom-Left
+		}
+	}
+}
 // =============================================
 void DebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color)
 {
