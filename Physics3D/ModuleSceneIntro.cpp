@@ -63,7 +63,7 @@ void ModuleSceneIntro::BuildMap()
 	LOG("Building map.");
 	
 	// First rect
-	App->physics->RectRoad(5,0, 0, 0, 2);
+	App->physics->RectRoad(5,10,0, 0, 0, 2);
 	//App->physics->RectRoad(-5, 1, 0, 10, 2, 3);
 
 	// First diagonal

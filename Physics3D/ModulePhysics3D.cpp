@@ -362,23 +362,25 @@ void ModulePhysics3D::AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, c
 void ModulePhysics3D::RectRoad(int length,int width, int x,int y,int z,int direction)
 {
 	bool colorSwitch = false;
-	for (int n = 0; n < length; n++)
+	for (int n = 0; n < length*2; n++)
 	{
-		Cube* s = new Cube(1.0f,2.0f,1.0f);
+		Cube* left = new Cube(1.0f,2.0f,1.0f);
+		Cube* right = new Cube(1.0f, 2.0f, 1.0f);
 
-		if (colorSwitch) { s->color = { 255,255,255 }; colorSwitch = false; }
-		else { s->color = { 255,0,0 }; colorSwitch = true; }
+		if (colorSwitch) { left->color= right->color = { 255,255,255 }; colorSwitch = false; }
+		else { left->color= right->color = { 255,0,0 }; colorSwitch = true; }
 
-		App->scene_intro->PrimitiveObjects.PushBack(s);
-		s->SetPos(x, y+1, z);
+		App->scene_intro->PrimitiveObjects.PushBack(left);
+		App->scene_intro->PrimitiveObjects.PushBack(right);
 
 		switch (direction)
 		{
-			case 0: x += 3.0f; break; //Right
-			case 1: x -= 3.0f; break; //Left
-			case 2: z -= 3.0f; break; //Forward
-			case 3: z += 3.0f; break; //Backward
+			case 0: x += 3.0f; left->SetPos(x, y + 1, z+width); right->SetPos(x, y + 1, z-width); break; //Right
+			case 1: x -= 3.0f; left->SetPos(x, y + 1, z - width); right->SetPos(x, y + 1, z + width); break; //Left
+			case 2: z += 3.0f; left->SetPos(x - width, y + 1, z); right->SetPos(x + width, y + 1, z); break; //Forward
+			case 3: z -= 3.0f; left->SetPos(x + width, y + 1, z); right->SetPos(x - width, y + 1, z); break; //Backward
 		}
+		
 	}
 }
 
