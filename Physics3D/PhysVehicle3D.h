@@ -43,6 +43,9 @@ struct VehicleInfo
 
 	Wheel* wheels;
 	int num_wheels;
+
+	PhysBody3D* joint;
+	vec3 jointOffset;
 };
 
 

@@ -18,6 +18,12 @@ PrimitiveTypes Primitive::GetType() const
 }
 
 // ------------------------------------------------------------
+void Primitive::SetBody(btRigidBody* newBody) 
+{
+	body = newBody;
+}
+
+// ------------------------------------------------------------
 void Primitive::Render() const
 {
 	glPushMatrix();

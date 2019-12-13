@@ -102,6 +102,14 @@ bool ModulePlayer::Start()
 	car.wheels[3].brake = true;
 	car.wheels[3].steering = false;
 
+	antena = new Cylinder(0.05f,1.0f);
+	antena_body = App->physics->AddBody(*antena,1.0f);
+	antena->SetBody(antena_body);
+	car.jointOffset = car.chassis_offset;
+	antena_anchor = { -1,0,0 };
+	car.joint = App->physics->AddBody(Cube(0.1f,0.1f,0.1f),1.0f);
+	App->physics->AddConstraintP2P(*antena_body->body, *car.joint->body,antena_anchor, car.chassis_offset);
+
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(0, 3, 0);
 	

@@ -23,10 +23,9 @@ public:
 public:
 
 	PhysVehicle3D* vehicle;
-	//Cube* frontChassis;
-	//Cube* rearChassis;
-	PhysBody3D* frontChass;
-	PhysBody3D* rearChass;
+	Cylinder* antena;
+	PhysBody3D* antena_body;
+	vec3 antena_anchor;
 	btPoint2PointConstraint* frontConstraint;
 	btPoint2PointConstraint* rearConstraint;
 	float turn;
