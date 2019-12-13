@@ -23,8 +23,10 @@ public:
 public:
 
 	PhysVehicle3D* vehicle;
-	Cube* frontChassis;
-	Cube* rearChassis;
+	//Cube* frontChassis;
+	//Cube* rearChassis;
+	PhysBody3D* frontChass;
+	PhysBody3D* rearChass;
 	btPoint2PointConstraint* frontConstraint;
 	btPoint2PointConstraint* rearConstraint;
 	float turn;

@@ -22,11 +22,13 @@ bool ModulePlayer::Start()
 
 	// Car properties ----------------------------------------
 	car.chassis_size.Set(2, 1, 4);
-	car.chassis_offset.Set(0, 1, 0);
-	/*car.front_chassis_size.Set(4,1,1);
-	car.front_chassis_offset.Set(0,0,5);
-	car.rear_chassis_size.Set(5,1,1);
-	car.rear_chassis_offset.Set(0,0,-5);*/
+	car.chassis_offset.Set(0, 0.5, 0);
+	car.front_chassis_size.Set(3,0.5,1);
+	car.front_chassis_offset.Set(0,0.3,2);
+	car.rear_chassis_size.Set(3.5,0.3,1);
+	car.rear_chassis_offset.Set(0,1,-2);
+	car.cabine_radius = 0.8f;
+	car.cabine_offset.Set(0,0.9,1);
 	car.mass = 500.0f;
 	car.suspensionStiffness = 15.0f;
 	car.suspensionCompression = 2.0f;
@@ -34,14 +36,6 @@ bool ModulePlayer::Start()
 	car.maxSuspensionTravelCm = 100.0f;
 	car.frictionSlip = 50.5f;
 	car.maxSuspensionForce = 10000.0f;
-
-	frontChassis = new Cube(3,1,1);
-	rearChassis = new Cube(4, 1, 1);
-	frontChassis->SetPos(0,1,2);
-	vec3 frontJoint(0,1,2);
-	vec3 rearJoint();
-	//App->physics->AddConstraintP2P(*vehicle,*frontChassis,frontJoint, car.chassis_offset);
-	//App->physics->AddConstraintP2P(*rearChassis,*frontChassis,frontJoint, car.chassis_offset);
 
 	// Wheel properties ---------------------------------------
 	float connection_height = 1.0f;
@@ -51,7 +45,7 @@ bool ModulePlayer::Start()
 
 	// Don't change anything below this line ------------------
 
-	float half_width = car.chassis_size.x*0.5f;
+	float half_width = car.chassis_size.x*0.65f;
 	float half_length = car.chassis_size.z*0.5f;
 	
 	vec3 direction(0,-1,0);

@@ -381,7 +381,8 @@ void ModulePhysics3D::RectRoad(int length,int width, int x,int y,int z,int direc
 			case 2: z += 3.0f; left->SetPos(x - width, y + 1, z); right->SetPos(x + width, y + 1, z); break; //Forward
 			case 3: z -= 3.0f; left->SetPos(x + width, y + 1, z); right->SetPos(x - width, y + 1, z); break; //Backward
 		}
-		
+		AddBody(*left,10000.0f);
+		AddBody(*right, 10000.0f);
 	}
 }
 
@@ -429,14 +430,8 @@ void ModulePhysics3D::DiagonalRoad(int length, int width, int x, int y, int z, i
 			case 2: z -= 2; x -= 2; left->SetPos(x + width, y + 1, z - width); right->SetPos(x - width, y + 1, z + width); break; //Top-Right
 			case 3: z += 2; x -= 2; left->SetPos(x + width, y + 1, z + width); right->SetPos(x - width, y + 1, z - width); break; //Bottom-Right
 		}
-
-		/*switch (direction)
-		{
-			case 0: x += 3.0f;  break; //Right
-			case 1: x -= 3.0f; left->SetPos(x, y + 1, z - width); right->SetPos(x, y + 1, z + width); break; //Left
-			case 2: z += 3.0f; left->SetPos(x - width, y + 1, z); right->SetPos(x + width, y + 1, z); break; //Forward
-			case 3: z -= 3.0f; left->SetPos(x + width, y + 1, z); right->SetPos(x - width, y + 1, z); break; //Backward
-		}*/
+		AddBody(*left, 10000.0f);
+		AddBody(*right, 10000.0f);
 	}
 }
 // =============================================
