@@ -23,13 +23,25 @@ bool ModulePlayer::Start()
 	// Car properties ----------------------------------------
 	car.chassis_size.Set(2, 1, 4);
 	car.chassis_offset.Set(0, 1, 0);
+	/*car.front_chassis_size.Set(4,1,1);
+	car.front_chassis_offset.Set(0,0,5);
+	car.rear_chassis_size.Set(5,1,1);
+	car.rear_chassis_offset.Set(0,0,-5);*/
 	car.mass = 500.0f;
-	car.suspensionStiffness = 15.88f;
-	car.suspensionCompression = 0.83f;
-	car.suspensionDamping = 0.88f;
-	car.maxSuspensionTravelCm = 1000.0f;
+	car.suspensionStiffness = 15.0f;
+	car.suspensionCompression = 2.0f;
+	car.suspensionDamping = 1.0f;
+	car.maxSuspensionTravelCm = 100.0f;
 	car.frictionSlip = 50.5f;
-	car.maxSuspensionForce = 4000.0f;
+	car.maxSuspensionForce = 10000.0f;
+
+	frontChassis = new Cube(3,1,1);
+	rearChassis = new Cube(4, 1, 1);
+	frontChassis->SetPos(0,1,2);
+	vec3 frontJoint(0,1,2);
+	vec3 rearJoint();
+	//App->physics->AddConstraintP2P(*vehicle,*frontChassis,frontJoint, car.chassis_offset);
+	//App->physics->AddConstraintP2P(*rearChassis,*frontChassis,frontJoint, car.chassis_offset);
 
 	// Wheel properties ---------------------------------------
 	float connection_height = 1.0f;
@@ -157,7 +169,7 @@ update_status ModulePlayer::Update(float dt)
 
 void ModulePlayer::RestartPlayer()
 {	
-	vehicle->SetPos(0, 5, 10);
-	vehicle->ApplyEngineForce(-acceleration);
+	vehicle->SetPos(0, 3, 0);
+	//vehicle->ApplyEngineForce(-acceleration);
 	brake = BRAKE_POWER;
 }

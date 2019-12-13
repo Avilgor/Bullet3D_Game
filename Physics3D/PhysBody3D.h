@@ -5,6 +5,9 @@
 
 class btRigidBody;
 class Module;
+class Sphere;
+class Cube;
+class Cylinder;
 
 // =================================================
 struct PhysBody3D
@@ -18,6 +21,7 @@ public:
 	void GetTransform(float* matrix) const;
 	void SetTransform(const float* matrix) const;
 	void SetPos(float x, float y, float z);
+
 
 private:
 	btRigidBody* body = nullptr;

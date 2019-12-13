@@ -44,11 +44,35 @@ void PhysVehicle3D::Render()
 	btVector3 offset(info.chassis_offset.x, info.chassis_offset.y, info.chassis_offset.z);
 	offset = offset.rotate(q.getAxis(), q.getAngle());
 
+	/*Cube FrontChassis(info.front_chassis_size.x, info.front_chassis_size.y, info.front_chassis_size.z);
+	vehicle->getChassisWorldTransform().getOpenGLMatrix(&FrontChassis.transform);*/
+	/*q = vehicle->getChassisWorldTransform().getRotation();
+	btVector3 offsetFront(info.front_chassis_offset.x, info.front_chassis_offset.y, info.front_chassis_offset.z);
+	offset = offset.rotate(q.getAxis(), q.getAngle());*/
+
+	/*Cube RearChassis(info.rear_chassis_size.x, info.rear_chassis_size.y, info.rear_chassis_size.z);
+	RearChassis.SetPos(info.rear_chassis_offset.x, info.rear_chassis_offset.y, info.rear_chassis_offset.z);*/
+	//vehicle->getChassisWorldTransform().getOpenGLMatrix(&RearChassis.transform);
+	/*q = vehicle->getChassisWorldTransform().getRotation();
+	btVector3 offsetRear(info.rear_chassis_offset.x, info.rear_chassis_offset.y, info.rear_chassis_offset.z);
+	offset = offset.rotate(q.getAxis(), q.getAngle());*/
+
 	chassis.transform.M[12] += offset.getX();
 	chassis.transform.M[13] += offset.getY();
 	chassis.transform.M[14] += offset.getZ();
 
+	/*FrontChassis.transform.M[12] += offset.getX();
+	FrontChassis.transform.M[13] += offset.getY();
+	FrontChassis.transform.M[14] += offset.getZ();
+
+	RearChassis.transform.M[12] += offset.getX();
+	RearChassis.transform.M[13] += offset.getY();
+	RearChassis.transform.M[14] += offset.getZ();*/
+	
+
 	chassis.Render();
+	/*FrontChassis.Render();
+	RearChassis.Render();*/
 }
 
 // ----------------------------------------------------------------------------
