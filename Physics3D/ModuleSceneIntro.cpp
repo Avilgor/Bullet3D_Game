@@ -18,7 +18,7 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
-	//App->audio->PlayMusic("path",-1.0f);
+	App->audio->PlayMusic("Sounds/BackgroundMusic.wav",-1.0f);
 
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
@@ -50,6 +50,7 @@ update_status ModuleSceneIntro::Update(float dt)
 		App->player->lastCheckpoint.x = 0;
 		App->player->lastCheckpoint.x = 3;
 		App->player->lastCheckpoint.x = 0;
+		App->audio->PlayMusic("Sounds/BackgroundMusic.wav", -1.0f);
 	}
 
 	for (uint n = 0; n < PrimitiveObjects.Count(); n++)
@@ -71,7 +72,7 @@ void ModuleSceneIntro::BuildMap()
 	//App->physics->DiagonalRoad(3, 5, 3, 0, 10, 1);
 	//App->physics->RectRoad(4, 10, 0, 0, 13, 1);
 
-	App->physics->Corner(10, 0, 0, 0, BOTTOM_RIGHT_CORNER);
+	//App->physics->Corner(10, 0, 0, 0, BOTTOM_RIGHT_CORNER);
 	//Enemies
 	App->physics->Enemy(1, 1, 2, 3, 1, 3);
 

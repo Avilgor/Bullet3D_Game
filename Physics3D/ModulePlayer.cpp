@@ -18,7 +18,10 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 	alive = true;
+	fxPlayed = false;
 	lastCheckpoint = {0,3,0};
+	App->audio->LoadFx("Sounds/WinSound.wav");
+	App->audio->LoadFx("Sounds/CarCrash.wav");
 	VehicleInfo car;
 //	vehicle->collType = CAR;
 
@@ -134,7 +137,7 @@ update_status ModulePlayer::Update(float dt)
     {
 		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		{
-			acceleration = MAX_ACCELERATION;
+			acceleration = MAX_ACCELERATION*2;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
@@ -151,7 +154,7 @@ update_status ModulePlayer::Update(float dt)
 
 		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		{
-			acceleration = -MAX_ACCELERATION;
+			acceleration = -MAX_ACCELERATION*2;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
@@ -184,6 +187,7 @@ void ModulePlayer::RestartPlayer(int x,int y, int z)
 	vehicle->SetPos(x, y, z);
 	brake = BRAKE_POWER;
 	alive = true;
+	fxPlayed = false;
 }
 
 void ModulePlayer::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
@@ -192,6 +196,13 @@ void ModulePlayer::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 	if (body2->collType == ENEMY)
 	{
 		alive = false;
+		if (!fxPlayed) { App->audio->PlayFx(2, 0); fxPlayed = true; }
+	}
+
+	if (body2->collType == WIN)
+	{
+		alive = false;
+		if (!fxPlayed) { App->audio->PlayFx(1, 0); fxPlayed = true; }
 	}
 
 	if (body2->collType == CHECKPOINT)

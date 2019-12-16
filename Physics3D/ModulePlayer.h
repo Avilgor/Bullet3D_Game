@@ -34,5 +34,6 @@ public:
 	float acceleration;
 	float brake;
 	bool alive;
+	bool fxPlayed;
 	vec3 lastCheckpoint;
 };

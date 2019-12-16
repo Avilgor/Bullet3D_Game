@@ -33,7 +33,8 @@ enum CollisionObject
 	CAR,
 	WALL,
 	ENEMY,
-	CHECKPOINT
+	CHECKPOINT,
+	WIN
 };
 
 enum RoadTypes
