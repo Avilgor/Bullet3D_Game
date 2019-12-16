@@ -15,6 +15,7 @@ struct PhysBody3D
 	friend class ModulePhysics3D;
 public:
 	PhysBody3D(btRigidBody* body);
+	PhysBody3D(btRigidBody* body, CollisionObject coll);
 	~PhysBody3D();
 
 	void Push(float x, float y, float z);
