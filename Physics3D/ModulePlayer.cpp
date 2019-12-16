@@ -182,7 +182,6 @@ update_status ModulePlayer::Update(float dt)
 void ModulePlayer::RestartPlayer(int x,int y, int z)
 {	
 	vehicle->SetPos(x, y, z);
-	//vehicle->ApplyEngineForce(-acceleration);
 	brake = BRAKE_POWER;
 	alive = true;
 }

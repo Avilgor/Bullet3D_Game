@@ -27,6 +27,7 @@ public:
 	Cylinder* antena;
 	PhysBody3D* antena_body;
 	vec3 antena_anchor;
+	//btTransform lastCheckpoint;
 	btPoint2PointConstraint* frontConstraint;
 	btPoint2PointConstraint* rearConstraint;
 	float turn;

@@ -35,9 +35,10 @@ public:
 	void AddConstraintP2P(btRigidBody& bodyA, btRigidBody& bodyB, const vec3& anchorA, const vec3& anchorB);
 	void AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB, const vec3& axisS, const vec3& axisB, bool disable_collision = false);
 
-	void RectRoad(int length, int width, int x, int y, int z, int direction);
+	void RectRoad(int length, int width, int x, int y, int z, RoadTypes direction);
 	void CurveRoad(int length, int width, int x, int y, int z, int direction);
 	void DiagonalRoad(int length, int width,int x,int y,int z,int direction);
+	void Corner(int width, int x, int y, int z, RoadTypes direction);
 	void Ground(int length, int width, int x, int y, int z);
 	void Enemy(int length, int width,int height, int x, int y, int z);
 	void Checkpoint(int x, int y, int z);

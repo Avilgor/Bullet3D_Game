@@ -36,6 +36,17 @@ enum CollisionObject
 	CHECKPOINT
 };
 
+enum RoadTypes
+{
+	FORWARD_RECT=1,
+	BACKWARD_RECT,
+	LEFT_RECT,
+	RIGHT_RECT,
+	TOP_RIGHT_CORNER,
+	TOP_LEFT_CORNER,
+	BOTTOM_RIGHT_CORNER,
+	BOTTOM_LEFT_CORNER
+};
 
 // Configuration -----------
 #define SCREEN_WIDTH 1280

@@ -365,7 +365,7 @@ void ModulePhysics3D::AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, c
 	constraints.add(hinge);
 	hinge->setDbgDrawSize(2.0f);
 }
-void ModulePhysics3D::RectRoad(int length,int width, int x,int y,int z,int direction)
+void ModulePhysics3D::RectRoad(int length,int width, int x,int y,int z, RoadTypes direction)
 {
 	bool colorSwitch = false;
 	for (int n = 0; n < length*2; n++)
@@ -381,14 +381,57 @@ void ModulePhysics3D::RectRoad(int length,int width, int x,int y,int z,int direc
 
 		switch (direction)
 		{
-			case 0: x += 3.0f; left->SetPos(x, y + 1, z+width); right->SetPos(x, y + 1, z-width); break; //Right
-			case 1: x -= 3.0f; left->SetPos(x, y + 1, z - width); right->SetPos(x, y + 1, z + width); break; //Left
-			case 2: z += 3.0f; left->SetPos(x - width, y + 1, z); right->SetPos(x + width, y + 1, z); break; //Forward
-			case 3: z -= 3.0f; left->SetPos(x + width, y + 1, z); right->SetPos(x - width, y + 1, z); break; //Backward
+			case RIGHT_RECT: x += 3.0f; left->SetPos(x, y + 1, z+width); right->SetPos(x, y + 1, z-width); break; //Right
+			case LEFT_RECT: x -= 3.0f; left->SetPos(x, y + 1, z - width); right->SetPos(x, y + 1, z + width); break; //Left
+			case FORWARD_RECT: z += 3.0f; left->SetPos(x - width, y + 1, z); right->SetPos(x + width, y + 1, z); break; //Forward
+			case BACKWARD_RECT: z -= 3.0f; left->SetPos(x + width, y + 1, z); right->SetPos(x - width, y + 1, z); break; //Backward
 		}
 		AddBody(*left,10000.0f, WALL);
 		AddBody(*right, 10000.0f, WALL);
 	}
+}
+
+void ModulePhysics3D::Corner(int width, int x, int y, int z, RoadTypes direction)
+{
+	//bool colorSwitch = false;
+	Cube* lonely = new Cube(1.0f, 2.0f, 1.0f);
+	Cube* rectZ = new Cube(1.0f, 2.0f, width);
+	Cube* rectX = new Cube(width, 2.0f, 1.0f);
+
+	App->scene_intro->PrimitiveObjects.PushBack(lonely);
+	App->scene_intro->PrimitiveObjects.PushBack(rectZ);
+	App->scene_intro->PrimitiveObjects.PushBack(rectX);
+
+	/*if (colorSwitch) { lonely->color = { 255,255,255 }; colorSwitch = false; }
+	else { lonely->color = { 255,0,0 }; colorSwitch = true; }*/
+
+	switch (direction)
+	{
+	case TOP_RIGHT_CORNER:
+		lonely->SetPos(x + width, y + 1, z);
+		rectX->SetPos(x + (width / 2), y + 1, z + width);
+		rectZ->SetPos(x, y + 1, z + (width / 2));
+		break;
+	case TOP_LEFT_CORNER:
+		lonely->SetPos(x - width, y + 1, z);
+		rectX->SetPos(x - (width / 2), y + 1, z + width);
+		rectZ->SetPos(x, y + 1, z + (width / 2));
+		break;
+	case BOTTOM_RIGHT_CORNER:
+		lonely->SetPos(x + width, y + 1, z);
+		rectX->SetPos(x + (width / 2), y + 1, z - width);
+		rectZ->SetPos(x, y + 1, z - (width / 2));
+		break;
+	case BOTTOM_LEFT_CORNER:
+		lonely->SetPos(x - width, y + 1, z);
+		rectX->SetPos(x - (width / 2), y + 1, z - width);
+		rectZ->SetPos(x, y + 1, z - (width / 2));
+		break;
+	}
+
+	AddBody(*lonely, 10000.0f, WALL);
+	AddBody(*rectZ, 10000.0f, WALL);
+	AddBody(*rectX, 10000.0f, WALL);
 }
 
 void ModulePhysics3D::CurveRoad(int length, int width, int x, int y, int z, int direction)
@@ -444,12 +487,12 @@ void ModulePhysics3D::Ground(int length, int width, int x, int y, int z)
 {
 	Cube* ground = new Cube(length, 0.05f, width);
 
-	ground->color = Green;//{ 255,0,0 };
+	ground->color = Black;//{ 35,35,35 };
 
 	App->scene_intro->PrimitiveObjects.PushBack(ground);
 
 	ground->SetPos(x,y,z);
-	AddBody(*ground, 10000.0f);
+	//AddBody(*ground, 10000.0f);
 }
 
 void ModulePhysics3D::Enemy(int length, int width, int height, int x, int y, int z)
