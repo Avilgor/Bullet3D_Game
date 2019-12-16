@@ -4,16 +4,19 @@ A racing game made using Bullet 3D physics engine.
 
 # Objective
 
-The objective is to arrive to the Goal before you run out of time.(May change)
+The objective is to arrive to the Goal.
+Green blocks are checkpoints, you have to hit them.
+Purple blocks are dangerous, avoid them or you will have to respawn in the last checkpoint.
 
 # Controls
 
 Move:
 	-Arrow keys: Car movement (Forward,left,right and backwards).
 	-X: Card Brake.
-	
+		
 Others:
-	-R: Restart.
+	-Space: Respawn in checkpoint.
+	-R: Restart level.
 
 # Creators
 - https://github.com/Avilgor

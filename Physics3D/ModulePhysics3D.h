@@ -27,9 +27,9 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
-	PhysBody3D* AddBody(const Sphere& sphere, float mass = 1.0f);
-	PhysBody3D* AddBody(const Cube& cube, float mass = 1.0f);
-	PhysBody3D* AddBody(const Cylinder& cylinder, float mass = 1.0f);
+	PhysBody3D* AddBody(const Sphere& sphere, float mass = 1.0f, CollisionObject coll = NONE);
+	PhysBody3D* AddBody(const Cube& cube, float mass = 1.0f, CollisionObject coll = NONE);
+	PhysBody3D* AddBody(const Cylinder& cylinder, float mass = 1.0f, CollisionObject coll = NONE);
 	PhysVehicle3D* AddVehicle(const VehicleInfo& info);
 
 	void AddConstraintP2P(btRigidBody& bodyA, btRigidBody& bodyB, const vec3& anchorA, const vec3& anchorB);
@@ -38,6 +38,9 @@ public:
 	void RectRoad(int length, int width, int x, int y, int z, int direction);
 	void CurveRoad(int length, int width, int x, int y, int z, int direction);
 	void DiagonalRoad(int length, int width,int x,int y,int z,int direction);
+	void Ground(int length, int width, int x, int y, int z);
+	void Enemy(int length, int width,int height, int x, int y, int z);
+	void Checkpoint(int x, int y, int z);
 
 private:
 

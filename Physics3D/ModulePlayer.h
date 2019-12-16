@@ -18,7 +18,7 @@ public:
 	bool Start();
 	update_status Update(float dt);
 	bool CleanUp();
-	void RestartPlayer();
+	void RestartPlayer(int x,int y,int z);
 
 public:
 
@@ -31,4 +31,5 @@ public:
 	float turn;
 	float acceleration;
 	float brake;
+	bool alive;
 };

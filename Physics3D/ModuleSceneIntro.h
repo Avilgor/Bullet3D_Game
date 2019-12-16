@@ -44,4 +44,5 @@ public:
 	PhysMotor3D* right_wheel;
 
 	p2DynArray<Primitive*> PrimitiveObjects;
+	vec3 Checkpoint;
 };

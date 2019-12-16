@@ -83,7 +83,6 @@ class btRigidBody  : public btCollisionObject
 	btScalar		m_additionalAngularDampingThresholdSqr;
 	btScalar		m_additionalAngularDampingFactor;
 
-
 	btScalar		m_linearSleepingThreshold;
 	btScalar		m_angularSleepingThreshold;
 
@@ -171,6 +170,7 @@ public:
 		}
 	};
 
+	CollisionObject collType;
 	///btRigidBody constructor using construction info
 	btRigidBody(	const btRigidBodyConstructionInfo& constructionInfo);
 

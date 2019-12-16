@@ -192,7 +192,7 @@ bool ModulePhysics3D::CleanUp()
 }
 
 // ---------------------------------------------------------
-PhysBody3D* ModulePhysics3D::AddBody(const Sphere& sphere, float mass)
+PhysBody3D* ModulePhysics3D::AddBody(const Sphere& sphere, float mass, CollisionObject coll)
 {
 	btCollisionShape* colShape = new btSphereShape(sphere.radius);
 	shapes.add(colShape);
@@ -211,6 +211,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Sphere& sphere, float mass)
 	btRigidBody* body = new btRigidBody(rbInfo);
 	PhysBody3D* pbody = new PhysBody3D(body);
 
+	pbody->collType = coll;
 	body->setUserPointer(pbody);
 	world->addRigidBody(body);
 	bodies.add(pbody);
@@ -220,7 +221,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Sphere& sphere, float mass)
 
 
 // ---------------------------------------------------------
-PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass)
+PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass, CollisionObject coll)
 {
 	btCollisionShape* colShape = new btBoxShape(btVector3(cube.size.x*0.5f, cube.size.y*0.5f, cube.size.z*0.5f));
 	shapes.add(colShape);
@@ -239,6 +240,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass)
 	btRigidBody* body = new btRigidBody(rbInfo);
 	PhysBody3D* pbody = new PhysBody3D(body);
 
+	pbody->collType = coll;
 	body->setUserPointer(pbody);
 	world->addRigidBody(body);
 	bodies.add(pbody);
@@ -247,7 +249,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass)
 }
 
 // ---------------------------------------------------------
-PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass)
+PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass, CollisionObject coll)
 {
 	btCollisionShape* colShape = new btCylinderShapeX(btVector3(cylinder.height*0.5f, cylinder.radius, 0.0f));
 	shapes.add(colShape);
@@ -266,6 +268,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass)
 	btRigidBody* body = new btRigidBody(rbInfo);
 	PhysBody3D* pbody = new PhysBody3D(body);
 
+	pbody->collType = coll;
 	body->setUserPointer(pbody);
 	world->addRigidBody(body);
 	bodies.add(pbody);
@@ -302,6 +305,7 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(const VehicleInfo& info)
 	body->setActivationState(DISABLE_DEACTIVATION);
 
 	world->addRigidBody(body);
+	body->collType = CAR;
 
 	btRaycastVehicle::btVehicleTuning tuning;
 	tuning.m_frictionSlip = info.frictionSlip;
@@ -381,8 +385,8 @@ void ModulePhysics3D::RectRoad(int length,int width, int x,int y,int z,int direc
 			case 2: z += 3.0f; left->SetPos(x - width, y + 1, z); right->SetPos(x + width, y + 1, z); break; //Forward
 			case 3: z -= 3.0f; left->SetPos(x + width, y + 1, z); right->SetPos(x - width, y + 1, z); break; //Backward
 		}
-		AddBody(*left,10000.0f);
-		AddBody(*right, 10000.0f);
+		AddBody(*left,10000.0f, WALL);
+		AddBody(*right, 10000.0f, WALL);
 	}
 }
 
@@ -430,10 +434,49 @@ void ModulePhysics3D::DiagonalRoad(int length, int width, int x, int y, int z, i
 			case 2: z -= 2; x -= 2; left->SetPos(x + width, y + 1, z - width); right->SetPos(x - width, y + 1, z + width); break; //Top-Right
 			case 3: z += 2; x -= 2; left->SetPos(x + width, y + 1, z + width); right->SetPos(x - width, y + 1, z - width); break; //Bottom-Right
 		}
-		AddBody(*left, 10000.0f);
-		AddBody(*right, 10000.0f);
+		AddBody(*left, 10000.0f, WALL);
+		AddBody(*right, 10000.0f, WALL);
 	}
 }
+
+void ModulePhysics3D::Ground(int length, int width, int x, int y, int z)
+{
+	Cube* ground = new Cube(length, 0.05f, width);
+
+	ground->color = Green;//{ 255,0,0 };
+
+	App->scene_intro->PrimitiveObjects.PushBack(ground);
+
+	ground->SetPos(x,y,z);
+	AddBody(*ground, 10000.0f);
+}
+
+void ModulePhysics3D::Enemy(int length, int width, int height, int x, int y, int z)
+{
+	Cube* enemy = new Cube(length, height, width);
+
+	enemy->color = { 178,0,255 };
+
+	App->scene_intro->PrimitiveObjects.PushBack(enemy);
+
+	enemy->SetPos(x, y, z);
+
+	AddBody(*enemy, 100.0f,ENEMY);
+}
+
+void ModulePhysics3D::Checkpoint(int x, int y, int z)
+{
+	Cube* checkpoint = new Cube(1, 2, 1);
+
+	checkpoint->color = { 0,255,0 };
+
+	App->scene_intro->PrimitiveObjects.PushBack(checkpoint);
+
+	checkpoint->SetPos(x, y, z);
+
+	AddBody(*checkpoint, 100.0f, CHECKPOINT);
+}
+
 // =============================================
 void DebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color)
 {

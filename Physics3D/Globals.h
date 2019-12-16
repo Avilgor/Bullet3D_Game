@@ -27,6 +27,16 @@ enum update_status
 	UPDATE_ERROR
 };
 
+enum CollisionObject
+{
+	NONE=1,
+	CAR,
+	WALL,
+	ENEMY,
+	CHECKPOINT
+};
+
+
 // Configuration -----------
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 1024

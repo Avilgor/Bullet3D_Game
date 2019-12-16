@@ -17,8 +17,9 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
-
+	alive = true;
 	VehicleInfo car;
+//	vehicle->collType = CAR;
 
 	// Car properties ----------------------------------------
 	car.chassis_size.Set(2, 1, 4);
@@ -102,13 +103,13 @@ bool ModulePlayer::Start()
 	car.wheels[3].brake = true;
 	car.wheels[3].steering = false;
 
-	antena = new Cylinder(0.05f,1.0f);
+	/*antena = new Cylinder(0.05f,1.0f);
 	antena_body = App->physics->AddBody(*antena,1.0f);
 	antena->SetBody(antena_body);
 	car.jointOffset = car.chassis_offset;
 	antena_anchor = { -1,0,0 };
 	car.joint = App->physics->AddBody(Cube(0.1f,0.1f,0.1f),1.0f);
-	App->physics->AddConstraintP2P(*antena_body->body, *car.joint->body,antena_anchor, car.chassis_offset);
+	App->physics->AddConstraintP2P(*antena_body->body, *car.joint->body,antena_anchor, car.chassis_offset);*/
 
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(0, 3, 0);
@@ -128,34 +129,37 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
+	if(alive)
+    {
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		{
+			acceleration = MAX_ACCELERATION;
+		}
 
-	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-	{
-		acceleration = MAX_ACCELERATION;
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		{
+			if (turn < TURN_DEGREES)
+				turn += TURN_DEGREES;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			if (turn > -TURN_DEGREES)
+				turn -= TURN_DEGREES;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		{
+			acceleration = -MAX_ACCELERATION;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
+		{
+			brake = BRAKE_POWER;
+		}
+
 	}
-
-	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-	{
-		if(turn < TURN_DEGREES)
-			turn +=  TURN_DEGREES;
-	}
-
-	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-	{
-		if(turn > -TURN_DEGREES)
-			turn -= TURN_DEGREES;
-	}
-
-	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-	{
-		acceleration = -MAX_ACCELERATION;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
-	{
-		brake = BRAKE_POWER;
-	}
-
+	
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
 	vehicle->Brake(brake);
@@ -169,9 +173,10 @@ update_status ModulePlayer::Update(float dt)
 }
 
 
-void ModulePlayer::RestartPlayer()
+void ModulePlayer::RestartPlayer(int x,int y, int z)
 {	
-	vehicle->SetPos(0, 3, 0);
+	vehicle->SetPos(x, y, z);
 	//vehicle->ApplyEngineForce(-acceleration);
 	brake = BRAKE_POWER;
+	alive = true;
 }
