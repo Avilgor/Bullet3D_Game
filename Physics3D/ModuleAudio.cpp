@@ -87,7 +87,7 @@ bool ModuleAudio::PlayMusic(const char* path, float fade_time)
 		// this call blocks until fade out is done
 		Mix_FreeMusic(music);
 	}
-
+	
 	music = Mix_LoadMUS(path);
 
 	if(music == NULL)
@@ -154,3 +154,4 @@ bool ModuleAudio::PlayFx(unsigned int id, int repeat)
 
 	return ret;
 }
+

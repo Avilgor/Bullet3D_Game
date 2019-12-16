@@ -66,13 +66,25 @@ void ModuleSceneIntro::BuildMap()
 	//Ground
 	App->physics->Ground(500,500,0,0,0);
 
-	// Circuit
-	//App->physics->RectRoad(7, 8, 0, 0, 0, FORWARD_RECT);
-	//App->physics->DiagonalRoad(5, 5, -3, 0, 40, 3);
-	//App->physics->DiagonalRoad(3, 5, 3, 0, 10, 1);
-	//App->physics->RectRoad(4, 10, 0, 0, 13, 1);
+	//Start box
+	App->physics->StartZone(17,0, 0, -7);
 
-	//App->physics->Corner(10, 0, 0, 0, BOTTOM_RIGHT_CORNER);
+	// Circuit
+	App->physics->RectRoad(7, 8, 0, 0, 0, FORWARD_RECT);
+	App->physics->Corner(15, -8,0, 45, TOP_RIGHT_CORNER);
+	App->physics->RectRoad(4, 8, 6, 0, 52, RIGHT_RECT);
+	App->physics->Corner(15, 47, 0, 60, BOTTOM_LEFT_CORNER);
+	App->physics->Corner(15, 32, 0, 62, TOP_RIGHT_CORNER);
+	App->physics->RectRoad(10, 8, 46, 0, 70, RIGHT_RECT);
+	App->physics->Corner(15, 122, 0, 63, TOP_LEFT_CORNER);
+	App->physics->RectRoad(3, 8, 115, 0, 63, BACKWARD_RECT);
+	App->physics->Corner(15, 123, 0, 43, BOTTOM_LEFT_CORNER);
+	App->physics->RectRoad(5, 8, 77, 0, 35, RIGHT_RECT); 
+	App->physics->Corner(15, 63, 0, 28, TOP_RIGHT_CORNER); 
+	App->physics->RectRoad(30, 8, 71, 0, 29, BACKWARD_RECT);
+	App->physics->StartZone(17, 71, 0, -161);
+	App->physics->Goal(71,0,-154);
+
 	//Enemies
 	App->physics->Enemy(1, 1, 2, 3, 1, 3);
 

@@ -116,7 +116,8 @@ bool ModulePlayer::Start()
 	App->physics->AddConstraintP2P(*antena_body->body, *car.joint->body,antena_anchor, car.chassis_offset);*/
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 3, 0);
+	//vehicle->SetPos(0, 3, 0);
+	vehicle->SetPos(60, 3, -170);
 	vehicle->collision_listeners.add(this);
 	return true;
 }
