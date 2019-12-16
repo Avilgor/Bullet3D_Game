@@ -19,7 +19,7 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
+	//void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 	void BuildMap();
 
 public:
@@ -44,5 +44,4 @@ public:
 	PhysMotor3D* right_wheel;
 
 	p2DynArray<Primitive*> PrimitiveObjects;
-	vec3 Checkpoint;
 };

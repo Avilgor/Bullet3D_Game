@@ -22,7 +22,6 @@ bool ModuleSceneIntro::Start()
 
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
-	Checkpoint = (0.0f, 3.0f, 0.0f);
 	BuildMap();
 
 	return ret;
@@ -48,13 +47,9 @@ update_status ModuleSceneIntro::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
 		App->player->RestartPlayer(0,3,0);
-		Checkpoint = (0, 3, 0);
-	}
-
-	//Restart to checkpoint
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	{
-		App->player->RestartPlayer(Checkpoint.x, Checkpoint.y+2, Checkpoint.z);
+		App->player->lastCheckpoint.x = 0;
+		App->player->lastCheckpoint.x = 3;
+		App->player->lastCheckpoint.x = 0;
 	}
 
 	for (uint n = 0; n < PrimitiveObjects.Count(); n++)
@@ -63,7 +58,7 @@ update_status ModuleSceneIntro::Update(float dt)
 	return UPDATE_CONTINUE;
 }
 
-void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
+/*void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
 	LOG("Collision detected");
 	if (body1->collType == CAR && body2->collType == ENEMY)
@@ -76,7 +71,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 		LOG("Checkpoint collision");
 		//Checkpoint = 
 	}
-}
+}*/
 
 void ModuleSceneIntro::BuildMap()
 {

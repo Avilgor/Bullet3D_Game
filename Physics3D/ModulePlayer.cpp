@@ -18,6 +18,7 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 	alive = true;
+	lastCheckpoint = {0,3,0};
 	VehicleInfo car;
 //	vehicle->collType = CAR;
 
@@ -113,7 +114,7 @@ bool ModulePlayer::Start()
 
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(0, 3, 0);
-	
+	vehicle->collision_listeners.add(this);
 	return true;
 }
 
@@ -157,8 +158,13 @@ update_status ModulePlayer::Update(float dt)
 		{
 			brake = BRAKE_POWER;
 		}
-
 	}
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		RestartPlayer(lastCheckpoint.x, lastCheckpoint.y + 2, lastCheckpoint.z);
+	}
+
 	
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
@@ -179,4 +185,20 @@ void ModulePlayer::RestartPlayer(int x,int y, int z)
 	//vehicle->ApplyEngineForce(-acceleration);
 	brake = BRAKE_POWER;
 	alive = true;
+}
+
+void ModulePlayer::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
+{
+	LOG("Collision detected");
+	if (body2->collType == ENEMY)
+	{
+		alive = false;
+	}
+
+	if (body2->collType == CHECKPOINT)
+	{
+		lastCheckpoint.x = 0;
+		lastCheckpoint.y = 0;
+		lastCheckpoint.z = 0;
+	}
 }

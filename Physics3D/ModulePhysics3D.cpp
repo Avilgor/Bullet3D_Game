@@ -461,7 +461,7 @@ void ModulePhysics3D::Enemy(int length, int width, int height, int x, int y, int
 
 	enemy->SetPos(x, y, z);
 
-	AddBody(*enemy, 100.0f,ENEMY);
+	AddBody(*enemy, 10000.0f,ENEMY);
 }
 
 void ModulePhysics3D::Checkpoint(int x, int y, int z)
