@@ -521,13 +521,13 @@ void ModulePhysics3D::Enemy(int length, int width, int height, int x, int y, int
 
 void ModulePhysics3D::Checkpoint(int x, int y, int z)
 {
-	Cube* checkpoint = new Cube(0.5, 2, 0.5);
+	Cube* checkpoint = new Cube(0.5, 1.0f, 0.5);
 
 	checkpoint->color = { 0,255,0 };
 
 	App->scene_intro->PrimitiveObjects.PushBack(checkpoint);
 
-	checkpoint->SetPos(x, y+1, z);
+	checkpoint->SetPos(x, y+0.5f, z);
 
 	AddBody(*checkpoint, 10000.0f, CHECKPOINT,x,y,z);
 }

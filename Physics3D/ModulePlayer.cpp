@@ -194,6 +194,7 @@ void ModulePlayer::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 	if (body2->collType == ENEMY)
 	{
 		alive = false;
+		brake = BRAKE_POWER;
 		if (!fxPlayed) { App->audio->PlayFx(2, 0); fxPlayed = true; }
 	}
 

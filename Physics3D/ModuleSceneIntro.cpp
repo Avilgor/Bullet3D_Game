@@ -81,24 +81,38 @@ void ModuleSceneIntro::BuildMap()
 	App->physics->Corner(15, 123, 0, 43, BOTTOM_LEFT_CORNER);
 	App->physics->RectRoad(5, 8, 77, 0, 35, RIGHT_RECT); 
 	App->physics->Corner(15, 63, 0, 28, TOP_RIGHT_CORNER); // Checkpoint location
-	App->physics->RectRoad(30, 8, 71, 0, 29, BACKWARD_RECT);
+	App->physics->RectRoad(30, 8, 71, 0, 29, BACKWARD_RECT);////
 	App->physics->StartZone(17, 71, 0, -161);
 	App->physics->Goal(71,0,-154);
 
 	//Enemies
-	App->physics->Enemy(1, 1, 2, 3, 1, 3);
-	App->physics->Enemy(1, 1, 2, 3, 1, 3);
-	App->physics->Enemy(1, 1, 2, 3, 1, 3);
-	App->physics->Enemy(1, 1, 2, 3, 1, 3);
-	App->physics->Enemy(1, 1, 2, 3, 1, 3);
-	App->physics->Enemy(1, 1, 2, 3, 1, 3);
-	App->physics->Enemy(1, 1, 2, 3, 1, 3);
-	App->physics->Enemy(1, 1, 2, 3, 1, 3);
-	App->physics->Enemy(1, 1, 2, 3, 1, 3);
-	App->physics->Enemy(1, 1, 2, 3, 1, 3);
+	for (int a = 0; a < 12; a++)
+	{
+		App->physics->Enemy(1, 1, 2, rand() % (6 - (-6) + 1) -6, 1, rand() % (40 - 5 + 1) + 5);
+	}
+	for (int a = 0; a < 10; a++)
+	{
+		App->physics->Enemy(1, 1, 2, rand() % (35 - 6 + 1) + 6, 1, rand() % (58 - 40 + 1) + 40);
+	}
+	for(int a=0;a<15;a++)
+	{
+		App->physics->Enemy(1, 1, 2, rand() % (105 - 40 + 1) + 40, 1, rand() % (75- 63 + 1) + 65);
+	}
+	for (int a = 0; a < 8; a++)
+	{
+		App->physics->Enemy(1, 1, 2, rand() % (120 - 110 + 1) + 110, 1, rand() % (62 - 40 + 1) + 40);
+	}
+	for (int a = 0; a < 10; a++)
+	{
+		App->physics->Enemy(1, 1, 2, rand() % (120 - 73 + 1) + 73, 1, rand() % (40 - 29 + 1) + 29);
+	}
+	for (int a = 0; a < 55; a++)
+	{
+		App->physics->Enemy(1, 1, 2, rand() % (78 - 65 + 1) + 65, 1, rand() % (29 - (-150) + 1)  -150);
+	}
 
 	//Checkpoints
 	App->physics->Checkpoint(40, 0, 60);
-	App->physics->Checkpoint(118, 0, 60);
-	App->physics->Checkpoint(64, 0, 30);
+	App->physics->Checkpoint(115, 0, 68);
+	App->physics->Checkpoint(68, 0, 30);
 }
