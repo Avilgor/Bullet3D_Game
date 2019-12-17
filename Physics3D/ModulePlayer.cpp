@@ -19,11 +19,10 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 	alive = true;
 	fxPlayed = false;
-	lastCheckpoint = {0,3,0};
+	lastCheckpoint = {0,2,0};
 	App->audio->LoadFx("Sounds/WinSound.wav");
 	App->audio->LoadFx("Sounds/CarCrash.wav");
 	VehicleInfo car;
-//	vehicle->collType = CAR;
 
 	// Car properties ----------------------------------------
 	car.chassis_size.Set(2, 1, 4);
@@ -116,8 +115,8 @@ bool ModulePlayer::Start()
 	App->physics->AddConstraintP2P(*antena_body->body, *car.joint->body,antena_anchor, car.chassis_offset);*/
 
 	vehicle = App->physics->AddVehicle(car);
-	//vehicle->SetPos(0, 3, 0);
-	vehicle->SetPos(60, 3, -170);
+	vehicle->SetPos(0, 2, 0);
+	//vehicle->SetPos(60, 3, -170);
 	vehicle->collision_listeners.add(this);
 	return true;
 }
@@ -126,7 +125,6 @@ bool ModulePlayer::Start()
 bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading player");
-	//vehicle->~PhysVehicle3D();
 	return true;
 }
 
@@ -166,7 +164,7 @@ update_status ModulePlayer::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		RestartPlayer(lastCheckpoint.x, lastCheckpoint.y + 2, lastCheckpoint.z);
+		RestartPlayer(lastCheckpoint.x+1, lastCheckpoint.y +2, lastCheckpoint.z+1);
 	}
 
 	
@@ -185,15 +183,14 @@ update_status ModulePlayer::Update(float dt)
 
 void ModulePlayer::RestartPlayer(int x,int y, int z)
 {	
-	vehicle->SetPos(x, y, z);
-	brake = BRAKE_POWER;
+	//brake = BRAKE_POWER;
+	vehicle->SetPos(x, y, z);	
 	alive = true;
 	fxPlayed = false;
 }
 
 void ModulePlayer::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
-{
-	LOG("Collision detected");
+{	
 	if (body2->collType == ENEMY)
 	{
 		alive = false;
@@ -208,8 +205,9 @@ void ModulePlayer::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 
 	if (body2->collType == CHECKPOINT)
 	{
-		lastCheckpoint.x = 0;
-		lastCheckpoint.y = 0;
-		lastCheckpoint.z = 0;
+		LOG("Collision checkpoint");
+		lastCheckpoint.x = body2->checkpointX;		
+		lastCheckpoint.y = body2->checkpointY;
+		lastCheckpoint.z = body2->checkpointZ;
 	}
 }

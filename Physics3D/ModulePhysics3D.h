@@ -27,9 +27,9 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
-	PhysBody3D* AddBody(const Sphere& sphere, float mass = 1.0f, CollisionObject coll = NONE);
-	PhysBody3D* AddBody(const Cube& cube, float mass = 1.0f, CollisionObject coll = NONE);
-	PhysBody3D* AddBody(const Cylinder& cylinder, float mass = 1.0f, CollisionObject coll = NONE);
+	PhysBody3D* AddBody(const Sphere& sphere, float mass = 1.0f, CollisionObject coll = NONE, float x = 0, float y = 0, float z = 0);
+	PhysBody3D* AddBody(const Cube& cube, float mass = 1.0f, CollisionObject coll = NONE, float x=0, float y=0, float z=0);
+	PhysBody3D* AddBody(const Cylinder& cylinder, float mass = 1.0f, CollisionObject coll = NONE, float x = 0, float y = 0, float z = 0);
 	PhysVehicle3D* AddVehicle(const VehicleInfo& info);
 
 	void AddConstraintP2P(btRigidBody& bodyA, btRigidBody& bodyB, const vec3& anchorA, const vec3& anchorB);

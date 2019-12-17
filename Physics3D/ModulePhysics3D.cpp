@@ -192,7 +192,7 @@ bool ModulePhysics3D::CleanUp()
 }
 
 // ---------------------------------------------------------
-PhysBody3D* ModulePhysics3D::AddBody(const Sphere& sphere, float mass, CollisionObject coll)
+PhysBody3D* ModulePhysics3D::AddBody(const Sphere& sphere, float mass, CollisionObject coll, float x, float y, float z)
 {
 	btCollisionShape* colShape = new btSphereShape(sphere.radius);
 	shapes.add(colShape);
@@ -212,6 +212,9 @@ PhysBody3D* ModulePhysics3D::AddBody(const Sphere& sphere, float mass, Collision
 	PhysBody3D* pbody = new PhysBody3D(body);
 
 	pbody->collType = coll;
+	pbody->checkpointX = x;
+	pbody->checkpointY = y;
+	pbody->checkpointZ = z;
 	body->setUserPointer(pbody);
 	world->addRigidBody(body);
 	bodies.add(pbody);
@@ -221,7 +224,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Sphere& sphere, float mass, Collision
 
 
 // ---------------------------------------------------------
-PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass, CollisionObject coll)
+PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass, CollisionObject coll,float x,float y,float z)
 {
 	btCollisionShape* colShape = new btBoxShape(btVector3(cube.size.x*0.5f, cube.size.y*0.5f, cube.size.z*0.5f));
 	shapes.add(colShape);
@@ -241,6 +244,9 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass, CollisionObje
 	PhysBody3D* pbody = new PhysBody3D(body);
 
 	pbody->collType = coll;
+	pbody->checkpointX = x;
+	pbody->checkpointY = y;
+	pbody->checkpointZ = z;
 	body->setUserPointer(pbody);
 	world->addRigidBody(body);
 	bodies.add(pbody);
@@ -249,7 +255,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass, CollisionObje
 }
 
 // ---------------------------------------------------------
-PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass, CollisionObject coll)
+PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass, CollisionObject coll, float x, float y, float z)
 {
 	btCollisionShape* colShape = new btCylinderShapeX(btVector3(cylinder.height*0.5f, cylinder.radius, 0.0f));
 	shapes.add(colShape);
@@ -269,6 +275,9 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass, Colli
 	PhysBody3D* pbody = new PhysBody3D(body);
 
 	pbody->collType = coll;
+	pbody->checkpointX = x;
+	pbody->checkpointY = y;
+	pbody->checkpointZ = z;
 	body->setUserPointer(pbody);
 	world->addRigidBody(body);
 	bodies.add(pbody);
@@ -489,7 +498,7 @@ void ModulePhysics3D::Ground(int length, int width, int x, int y, int z)
 {
 	Cube* ground = new Cube(length, 0.05f, width);
 
-	ground->color = Black;//{ 35,35,35 };
+	ground->color = Black;
 
 	App->scene_intro->PrimitiveObjects.PushBack(ground);
 
@@ -512,15 +521,15 @@ void ModulePhysics3D::Enemy(int length, int width, int height, int x, int y, int
 
 void ModulePhysics3D::Checkpoint(int x, int y, int z)
 {
-	Cube* checkpoint = new Cube(1, 2, 1);
+	Cube* checkpoint = new Cube(0.5, 2, 0.5);
 
 	checkpoint->color = { 0,255,0 };
 
 	App->scene_intro->PrimitiveObjects.PushBack(checkpoint);
 
-	checkpoint->SetPos(x, y, z);
+	checkpoint->SetPos(x, y+1, z);
 
-	AddBody(*checkpoint, 100.0f, CHECKPOINT);
+	AddBody(*checkpoint, 10000.0f, CHECKPOINT,x,y,z);
 }
 
 void ModulePhysics3D::Goal(int x, int y, int z)
