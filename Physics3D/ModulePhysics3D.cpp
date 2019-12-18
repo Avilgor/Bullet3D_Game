@@ -309,12 +309,12 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(const VehicleInfo& info)
 	btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(info.mass, myMotionState, comShape, localInertia);
 
-	btRigidBody* body = new btRigidBody(rbInfo);
-	body->setContactProcessingThreshold(BT_LARGE_FLOAT);
-	body->setActivationState(DISABLE_DEACTIVATION);
+	btRigidBody* _body = new btRigidBody(rbInfo);
+	_body->setContactProcessingThreshold(BT_LARGE_FLOAT);
+	_body->setActivationState(DISABLE_DEACTIVATION);
 
-	world->addRigidBody(body);
-	body->collType = CAR;
+	world->addRigidBody(_body);
+	_body->collType = CAR;
 
 	btRaycastVehicle::btVehicleTuning tuning;
 	tuning.m_frictionSlip = info.frictionSlip;
@@ -324,7 +324,7 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(const VehicleInfo& info)
 	tuning.m_suspensionDamping = info.suspensionDamping;
 	tuning.m_suspensionStiffness = info.suspensionStiffness;
 
-	btRaycastVehicle* vehicle = new btRaycastVehicle(tuning, body, vehicle_raycaster);
+	btRaycastVehicle* vehicle = new btRaycastVehicle(tuning, _body, vehicle_raycaster);
 
 	vehicle->setCoordinateSystem(0, 1, 2);
 
@@ -338,8 +338,9 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(const VehicleInfo& info)
 	}
 	// ---------------------
 
-	PhysVehicle3D* pvehicle = new PhysVehicle3D(body, vehicle, info);
-	body->setUserPointer(pvehicle);
+	PhysVehicle3D* pvehicle = new PhysVehicle3D(_body, vehicle, info);
+	_body->setUserPointer(pvehicle);
+	//pvehicle->body = _body;
 	world->addVehicle(vehicle);
 	vehicles.add(pvehicle);
 

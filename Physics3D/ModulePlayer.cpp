@@ -33,6 +33,7 @@ bool ModulePlayer::Start()
 	car.rear_chassis_offset.Set(0,1,-2);
 	car.cabine_radius = 0.8f;
 	car.cabine_offset.Set(0,0.9,1);
+	car.antenaOffset.Set(0,4,-5);
 	car.mass = 500.0f;
 	car.suspensionStiffness = 15.0f;
 	car.suspensionCompression = 2.0f;
@@ -106,18 +107,18 @@ bool ModulePlayer::Start()
 	car.wheels[3].brake = true;
 	car.wheels[3].steering = false;
 
-	/*antena = new Cylinder(0.05f,1.0f);
-	antena_body = App->physics->AddBody(*antena,1.0f);
-	antena->SetBody(antena_body);
-	car.jointOffset = car.chassis_offset;
-	antena_anchor = { -1,0,0 };
-	car.joint = App->physics->AddBody(Cube(0.1f,0.1f,0.1f),1.0f);
-	App->physics->AddConstraintP2P(*antena_body->body, *car.joint->body,antena_anchor, car.chassis_offset);*/
+	decor = new Sphere(0.2f);
+	//car.jointOffset = car.chassis_offset;
+	//car.joint = App->physics->AddBody(Cube(0.1f,0.1f,0.1f),1.0f);
+	decorBody = App->physics->AddBody(*decor);
+	
 
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(0, 2, 0);
 	//vehicle->SetPos(60, 3, -170);
 	vehicle->collision_listeners.add(this);
+
+	App->physics->AddConstraintP2P(*decorBody->body, *vehicle->body, car.rear_chassis_offset, car.rear_chassis_offset);
 	return true;
 }
 
@@ -177,6 +178,10 @@ update_status ModulePlayer::Update(float dt)
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
 	App->window->SetTitle(title);
 
+	mat4x4 decorMatrix;	
+	decorBody->GetTransform(&decorMatrix);
+	decor->transform = decorMatrix; 
+	decor->Render();
 	return UPDATE_CONTINUE;
 }
 

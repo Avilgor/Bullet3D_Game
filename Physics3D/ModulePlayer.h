@@ -24,12 +24,8 @@ public:
 public:
 
 	PhysVehicle3D* vehicle;
-	Cylinder* antena;
-	PhysBody3D* antena_body;
-	vec3 antena_anchor;
-	//btTransform lastCheckpoint;
-	btPoint2PointConstraint* frontConstraint;
-	btPoint2PointConstraint* rearConstraint;
+	Sphere* decor;
+	PhysBody3D* decorBody;
 	float turn;
 	float acceleration;
 	float brake;

@@ -66,12 +66,12 @@ void PhysVehicle3D::Render()
 	btVector3 offsetCabine(info.cabine_offset.x, info.cabine_offset.y, info.cabine_offset.z);
 	offsetCabine = offsetCabine.rotate(q.getAxis(), q.getAngle());
 
-	Cube jointPrimitive(0.1f,0.1f,0.1f);
+	/*Cube jointPrimitive(0.1f,0.1f,0.1f);
 	jointPrimitive.color = White;
 	vehicle->getChassisWorldTransform().getOpenGLMatrix(&jointPrimitive.transform);
 	q = vehicle->getChassisWorldTransform().getRotation();
 	btVector3 offsetJoint(info.jointOffset.x, info.jointOffset.y, info.jointOffset.z);
-	offsetJoint = offsetJoint.rotate(q.getAxis(), q.getAngle());
+	offsetJoint = offsetJoint.rotate(q.getAxis(), q.getAngle());*/
 
 	chassis.transform.M[12] += offset.getX();
 	chassis.transform.M[13] += offset.getY();
@@ -89,16 +89,16 @@ void PhysVehicle3D::Render()
 	cabine.transform.M[13] += offsetCabine.getY();
 	cabine.transform.M[14] += offsetCabine.getZ();
 
-	jointPrimitive.transform.M[12] += offsetJoint.getX();
+	/*jointPrimitive.transform.M[12] += offsetJoint.getX();
 	jointPrimitive.transform.M[13] += offsetJoint.getY();
-	jointPrimitive.transform.M[14] += offsetJoint.getZ();
+	jointPrimitive.transform.M[14] += offsetJoint.getZ();*/
 
-
+	
 	chassis.Render();
 	FrontChassis.Render();
 	RearChassis.Render();
 	cabine.Render();
-	jointPrimitive.Render();
+	//jointPrimitive.Render();
 }
 
 // ----------------------------------------------------------------------------

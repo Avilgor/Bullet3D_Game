@@ -43,9 +43,7 @@ struct VehicleInfo
 
 	Wheel* wheels;
 	int num_wheels;
-
-	PhysBody3D* joint;
-	vec3 jointOffset;
+	vec3 antenaOffset;
 };
 
 
@@ -64,6 +62,6 @@ public:
 public:
 
 	VehicleInfo info;
-	btRigidBody* Body;
+	//btRigidBody* Body;
 	btRaycastVehicle* vehicle;
 };
