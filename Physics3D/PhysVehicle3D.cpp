@@ -53,7 +53,7 @@ void PhysVehicle3D::Render()
 	offsetFront = offsetFront.rotate(q.getAxis(), q.getAngle());
 
 	Cube RearChassis(info.rear_chassis_size.x, info.rear_chassis_size.y, info.rear_chassis_size.z);
-	RearChassis.color = Blue;
+	RearChassis.color = Red;
 	vehicle->getChassisWorldTransform().getOpenGLMatrix(&RearChassis.transform);
 	q = vehicle->getChassisWorldTransform().getRotation();
 	btVector3 offsetRear(info.rear_chassis_offset.x, info.rear_chassis_offset.y, info.rear_chassis_offset.z);

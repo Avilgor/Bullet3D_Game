@@ -19,7 +19,7 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 	alive = true;
 	fxPlayed = false;
-	lastCheckpoint = {0,2,0};
+	lastCheckpoint = {-3,1,-3};
 	App->audio->LoadFx("Sounds/WinSound.wav");
 	App->audio->LoadFx("Sounds/CarCrash.wav");
 	VehicleInfo car;
@@ -164,7 +164,7 @@ update_status ModulePlayer::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
-		RestartPlayer(lastCheckpoint.x+1, lastCheckpoint.y +2, lastCheckpoint.z+1);
+		RestartPlayer(lastCheckpoint.x+3, lastCheckpoint.y+1, lastCheckpoint.z+3);
 	}
 
 	

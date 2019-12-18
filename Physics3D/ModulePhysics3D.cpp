@@ -516,27 +516,27 @@ void ModulePhysics3D::Enemy(int length, int width, int height, int x, int y, int
 
 	enemy->SetPos(x, y, z);
 
-	AddBody(*enemy, 10000.0f,ENEMY);
+	AddBody(*enemy, 1000000.0f,ENEMY);
 }
 
 void ModulePhysics3D::Checkpoint(int x, int y, int z)
 {
 	Cube* checkpoint = new Cube(0.5, 1.0f, 0.5);
 
-	checkpoint->color = { 0,255,0 };
+	checkpoint->color = { 0,0,255 }; 
 
 	App->scene_intro->PrimitiveObjects.PushBack(checkpoint);
 
 	checkpoint->SetPos(x, y+0.5f, z);
 
-	AddBody(*checkpoint, 10000.0f, CHECKPOINT,x,y,z);
+	AddBody(*checkpoint, 1000000.0f, CHECKPOINT,x,y,z);
 }
 
 void ModulePhysics3D::Goal(int x, int y, int z)
 {
 	Cube* finish = new Cube(15, 6, 1);
 
-	finish->color = { 248,251,17 };
+	finish->color = { 0,255,0 }; 
 
 	App->scene_intro->PrimitiveObjects.PushBack(finish);
 
