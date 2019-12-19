@@ -26,14 +26,13 @@ public:
 	void			SetRotation(float angle, const vec3 &u);
 	void			Scale(float x, float y, float z);
 	PrimitiveTypes	GetType() const;
-	void			SetBody(btRigidBody* newBody);
 
 public:
 	
 	Color color;
 	mat4x4 transform;
 	bool axis,wire;
-	btRigidBody* body;
+	PhysBody3D* body;
 	CollisionObject collType;
 protected:
 	PrimitiveTypes type;
