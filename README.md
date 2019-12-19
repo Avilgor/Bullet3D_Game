@@ -1,17 +1,18 @@
 # Bullet3D_Game
 
-A racing game made using Bullet 3D physics engine.
+This is a racing Game created using Bullet 3D Physics Library by Carlos Randino (**crandino** on GitHub) and Jordi Nunes in Physics II Subject on CITM (Terrassa). 
+Check out the [Release](https://github.com/Avilgor/Bullet3D_Game/releases)!
 
 # Objective
 
-The objective is to arrive to the Goal.
-Green blocks are checkpoints, you have to hit them.
-Purple blocks are dangerous, avoid them or you will have to respawn in the last checkpoint.
+The objective is to arrive to the Goal (green block).
+Blue blocks are checkpoints, you have to hit them in order to trigger them.
+Pinl blocks are dangerous, avoid them or you will have to respawn in the last checkpoint.
 
 # Controls
 
 Move:
-	-Arrow keys: Car movement (Forward,left,right and backwards).
+	-Arrow keys: Car movement (Forward, left, right and backwards).
 	-X: Card Brake.
 		
 Others:
