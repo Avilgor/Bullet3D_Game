@@ -220,9 +220,7 @@ PhysBody3D* ModulePhysics3D::AddBody( Sphere& sphere, float mass, CollisionObjec
 	world->addRigidBody(body);
 	bodies.add(pbody);
 	//sphere.body = pbody;
-	mat4x4 matrix;
-	pbody->GetTransform(&matrix);
-	sphere.transform = matrix;
+
 	return pbody;
 }
 
@@ -256,9 +254,6 @@ PhysBody3D* ModulePhysics3D::AddBody( Cube& cube, float mass, CollisionObject co
 	world->addRigidBody(body);
 	bodies.add(pbody);
 	//cube.body = pbody;
-	mat4x4 matrix;
-	pbody->GetTransform(&matrix);
-	cube.transform = matrix;
 
 	return pbody;
 }
@@ -291,9 +286,6 @@ PhysBody3D* ModulePhysics3D::AddBody( Cylinder& cylinder, float mass, CollisionO
 	world->addRigidBody(body);
 	bodies.add(pbody);
 	//cylinder.body = pbody;
-	mat4x4 matrix;
-	pbody->GetTransform(&matrix);
-	cylinder.transform = matrix;
 
 	return pbody;
 }
