@@ -4,6 +4,7 @@
 #include "Primitive.h"
 #include "PhysBody3D.h"
 #include "ModuleAudio.h"
+#include <ctime>
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -91,14 +92,14 @@ void ModuleSceneIntro::BuildMap()
 	App->physics->Goal(71,0,-154);
 
 	//Enemies
-	
+	srand(time(NULL));
 	for (int a = 0; a < 9; a++)
 	{
 		App->physics->Enemy(1, 1, 2, rand() % (6 - (-6) + 1) - 6, 1, rand() % (40 - 5 + 1) + 5);
 	}
 	for (int a = 0; a < 8; a++)
 	{
-		App->physics->Enemy(1, 1, 2, rand() % (35 - 6 + 1) + 6, 1, rand() % (58 - 40 + 1) + 40);
+		App->physics->Enemy(1, 1, 2, rand() % (35 - 6 + 1) + 6, 1, rand() % (58 - 43 + 1) + 43);
 	}
 	for (int a = 0; a < 12; a++)
 	{
