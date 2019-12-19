@@ -397,8 +397,8 @@ void ModulePhysics3D::RectRoad(int length,int width, int x,int y,int z, RoadType
 			case FORWARD_RECT: z += 3.0f; left->SetPos(x - width, y + 1, z); right->SetPos(x + width, y + 1, z); break; //Forward
 			case BACKWARD_RECT: z -= 3.0f; left->SetPos(x + width, y + 1, z); right->SetPos(x - width, y + 1, z); break; //Backward
 		}
-		AddBody(*left,10000.0f, WALL);
-		AddBody(*right, 10000.0f, WALL);
+		AddBody(*left, 1000000.0f, WALL);
+		AddBody(*right, 1000000.0f, WALL);
 	}
 }
 
@@ -440,9 +440,9 @@ void ModulePhysics3D::Corner(int width, int x, int y, int z, RoadTypes direction
 			break;
 	}
 
-	AddBody(*lonely, 10000.0f, WALL);
-	AddBody(*rectZ, 10000.0f, WALL);
-	AddBody(*rectX, 10000.0f, WALL);
+	AddBody(*lonely, 1000000.0f, WALL);
+	AddBody(*rectZ, 1000000.0f, WALL);
+	AddBody(*rectX, 1000000.0f, WALL);
 }
 
 void ModulePhysics3D::StartZone(int width, int x, int y, int z)
@@ -463,9 +463,9 @@ void ModulePhysics3D::StartZone(int width, int x, int y, int z)
 	ShortLeft->SetPos(x + (width / 2), y + 1, z+(width/4));
 	ShortRight->SetPos(x-(width/2), y + 1,z+(width/4));
 
-	AddBody(*Large, 10000.0f, WALL);
-	AddBody(*ShortLeft, 10000.0f, WALL);
-	AddBody(*ShortRight, 10000.0f, WALL);
+	AddBody(*Large, 1000000.0f, WALL);
+	AddBody(*ShortLeft, 1000000.0f, WALL);
+	AddBody(*ShortRight, 1000000.0f, WALL);
 }
 
 
@@ -490,8 +490,8 @@ void ModulePhysics3D::DiagonalRoad(int length, int width, int x, int y, int z, i
 			case 2: z -= 2; x -= 2; left->SetPos(x + width, y + 1, z - width); right->SetPos(x - width, y + 1, z + width); break; //Top-Right
 			case 3: z += 2; x -= 2; left->SetPos(x + width, y + 1, z + width); right->SetPos(x - width, y + 1, z - width); break; //Bottom-Right
 		}
-		AddBody(*left, 10000.0f, WALL);
-		AddBody(*right, 10000.0f, WALL);
+		AddBody(*left, 1000000.0f, WALL);
+		AddBody(*right, 1000000.0f, WALL);
 	}
 }
 
