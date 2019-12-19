@@ -1,6 +1,6 @@
 # Bullet3D_Game
 
-This is a racing Game created using Bullet 3D Physics Library by Carlos Randino (**crandino** on GitHub) and Jordi Nunes in Physics II Subject on CITM (Terrassa). 
+This is a Racing Game created using Bullet 3D Physics Library by Carlos Randino (**crandino** on GitHub) and Jordi Nunes in Physics II Subject on CITM (Terrassa). 
 Check out the [Release](https://github.com/Avilgor/Bullet3D_Game/releases)!
 
 # Objective
