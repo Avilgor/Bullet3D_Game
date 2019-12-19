@@ -44,6 +44,7 @@ public:
 	void Checkpoint(int x, int y, int z);
 	void Goal(int x, int y, int z);
 
+	
 private:
 
 	bool debug;

@@ -22,6 +22,7 @@ bool ModulePlayer::Start()
 	lastCheckpoint = {-3,1,-3};
 	App->audio->LoadFx("Sounds/WinSound.wav");
 	App->audio->LoadFx("Sounds/CarCrash.wav");
+	App->audio->LoadFx("Sounds/CheckpointSound.wav");
 	VehicleInfo car;
 
 	// Car properties ----------------------------------------
@@ -215,5 +216,6 @@ void ModulePlayer::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 		lastCheckpoint.x = body2->checkpointX;		
 		lastCheckpoint.y = body2->checkpointY;
 		lastCheckpoint.z = body2->checkpointZ;
+		if (!fxPlayed) { App->audio->PlayFx(3, 0); fxPlayed = true; }
 	}
 }
