@@ -53,8 +53,13 @@ update_status ModuleSceneIntro::Update(float dt)
 		App->audio->PlayMusic("Sounds/BackgroundMusic.wav", -1.0f);
 	}
 
+	//mat4x4 transMatrix;
 	for (uint n = 0; n < PrimitiveObjects.Count(); n++)
+	{		
+		//PrimitiveObjects[n]->body->GetTransform(&transMatrix);
+		//PrimitiveObjects[n]->transform = transMatrix;
 		PrimitiveObjects[n]->Render();
+	}	
 
 	return UPDATE_CONTINUE;
 }

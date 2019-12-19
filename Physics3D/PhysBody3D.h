@@ -28,7 +28,6 @@ public:
 	p2List<Module*> collision_listeners;
 	btRigidBody* body;
 	CollisionObject collType;
-	//vec3 checkpoint = (0,0,0);
 	float checkpointX, checkpointY, checkpointZ;
 };
 
